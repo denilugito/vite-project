@@ -1,26 +1,26 @@
-import React from 'react';
-import { useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const App = () => {
 
-  let APIData = useRef(null);
+  let [data,setData] = useState();
 
-  const fetchData = async () => {
+  useEffect(()=> {
     
-    const response = await fetch("https://dummyjson.com/products")
-    
-  }
+    (async ()=>{
+      
+      let response = await fetch('https://dummyjson.com/products/1')
+      let json = await response.json()
+      setData(json)
 
-  const showData = () => {
+    })()
 
-  }
+  },[]) 
 
   return (
-    <div>
-      <button onClick={fetchData}>Call Api</button>
-      <button onClick={}>Show Data</button>
+    <div>       
+      {JSON.stringify(data)}
     </div>
-  );
+    );
 };
 
 export default App;
